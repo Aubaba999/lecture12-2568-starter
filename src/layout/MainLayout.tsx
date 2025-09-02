@@ -1,14 +1,39 @@
 import { Outlet } from "react-router-dom";
-import Header from "../components/Header";
+import { AppShell } from "@mantine/core";
+import HeaderComponent from "../components/Header";
 import Sidebar from "../components/Sidebar";
-import Footer from "../components/Footer";
+import FooterComponent from "../components/Footer";
+import { useDisclosure } from "@mantine/hooks";
 export default function MainLayout() {
+  const [opened, { toggle }] = useDisclosure();
+  //opened: เป็น boolean (true/false)
+  //toggle(): สลับค่า opened (true → false → true)
   return (
-    <div>
-      <Header />
-      <Sidebar />
-      <Outlet />
-      <Footer />
-    </div>
+    <AppShell
+      padding="md"
+      header={{ height: 70 }}
+      navbar={{ width: 300, breakpoint: "sm", collapsed: { mobile: !opened } }}
+      footer={{ height: 50 }}
+    >
+      <AppShell.Header>
+        <HeaderComponent opened={opened} toggle={toggle} />
+      </AppShell.Header>
+
+      <AppShell.Navbar>
+        <Sidebar />
+      </AppShell.Navbar>
+
+      <AppShell.Footer>
+        <FooterComponent
+          year="2025"
+          fullName="Kasaem Suttajai"
+          studentId="67061075"
+        />
+      </AppShell.Footer>
+
+      <AppShell.Main>
+        <Outlet />
+      </AppShell.Main>
+    </AppShell>
   );
 }

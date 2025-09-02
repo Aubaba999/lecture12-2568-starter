@@ -1,4 +1,55 @@
-import { NavLink } from "react-router-dom";
+import { NavLink as RouterNavLink } from "react-router-dom";
+import {
+  NavLink,
+  Stack,
+  Box,
+  Avatar,
+  Indicator,
+  Text,
+  Group,
+} from "@mantine/core";
+// interface SidebarComponentProps  {
+//   userName: string;
+//   type?: "admin" |"student";
+// }
+// export type { SidebarComponentProps };
 export default function Sidebar() {
-  return <div>Sidebar</div>;
+  return (
+    <Stack
+      align="stretch"
+      justify="space-between"
+      gap="md"
+      style={{ height: "100%" }}
+    >
+      {/* Menu / เมนู*/}
+      <Box>
+        <NavLink
+          color="boss"
+          label="Home"
+          component={RouterNavLink}
+          to="/"
+          active
+        />
+        <NavLink
+          color="boss"
+          label="About"
+          component={RouterNavLink}
+          to="/about"
+        />
+        {/* ตัวอย่าง ใช้ Navlink กับ  components อื่นๆ ของ mantine */}
+        {/* <Text component={RouterNavLink} to="/">
+          Test
+        </Text> */}
+      </Box>
+      {/* แสดงผู้ใช้งาน */}
+      <Box p={10}>
+        <Group>
+          <Indicator inline size={10} offset={5} position="bottom-end" color="green" withBorder>
+            <Avatar src="/yellowguy.jpg"></Avatar>
+          </Indicator>
+         <Text>User: Boss </Text>
+        </Group>
+      </Box>
+    </Stack>
+  );
 }
